@@ -1,3 +1,7 @@
+from naif import recherche_mot
+import time
+
+
 def pre_traitement(mot):
     """
     Calcule le dictionnaire des décalages pour un mot, en prétraitement de l'algo Boyer Moore
@@ -61,3 +65,24 @@ assert boyer_moore('abracadabra', 'bara') is False
 assert boyer_moore('maman est là', 'maman')
 assert boyer_moore('bonjour maman', 'maman')
 assert boyer_moore('bonjour maman', 'papa') is False
+
+
+fichier = open("lerougeetlenoir.txt", "r")
+roman = fichier.read()
+fichier.close()
+
+t1 = 0
+d = time.time()
+for i in range(100):
+    boyer_moore(roman, "Julien trembla")
+f = time.time()
+t1 = t1 + f - d
+print(t1)
+
+t1 = 0
+d = time.time()
+for i in range(100):
+    recherche_mot(roman, "Julien trembla")
+f = time.time()
+t1 = t1 + f - d
+print(t1)
